@@ -1,0 +1,21 @@
+<html>
+<body>
+
+<p>Creating a JavaScript Object.</p>
+<p id="demo"/>
+
+<script>
+
+var person= {
+  firstname:"john",
+  lastname:"Doe",
+  id: 5566,
+  fullname:function(){
+    return this.firstname+""+this.lastname;
+  }
+  };
+document.write(person.firstname,person.lastname).value;
+document.getElementById("demo").innerHTML=person.firstname + "" + person.lastname;
+  </script>
+  </body>
+  </html>
