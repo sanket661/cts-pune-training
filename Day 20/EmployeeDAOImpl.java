@@ -48,14 +48,35 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 	@Override
 	public boolean updateEmployee(Employee employee) {
+		String query="update employee set address=? where id=?";
+		try {
+			ps=conn.prepareStatement(query);
+			ps.setString(1, employee.getAddress());
+			ps.setInt(2, employee.getId());
+			ps.executeUpdate();
+			return true;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 		
-		return false;
 	}
 
 	@Override
-	public boolean deleteEmployee(Employee employee) {
+	public boolean deleteEmployee(Employee employeeById) {
+		String query="delete from employee where id=?";
+		try {
+			ps=conn.prepareStatement(query);
+			ps.setInt(1,employeeById.getId());
+			ps.executeUpdate();
+			return true;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 		
-		return false;
 	}
 
 	@Override
@@ -63,9 +84,8 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		String query="select * from employee where id=?";
 		try {
 		Employee emp=null;
-		Statement stmt=conn.createStatement();
-			ps=conn.prepareStatement(query);
-			ps.setInt(1,id);
+		ps=conn.prepareStatement(query);
+		ps.setInt(1,id);
 		ResultSet rs= ps.executeQuery();
 		while(rs.next())
 		{
